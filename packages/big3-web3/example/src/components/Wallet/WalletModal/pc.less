@@ -1,0 +1,115 @@
+@import url('~@/assets/styles/util.less');
+
+.pc( {
+        .wallet-modal {
+            width: 744px !important;
+            min-width: 744px !important;
+
+            .loggedin {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+
+                .address {
+                    margin-top: 33px;
+                    display: flex;
+                    align-items: center;
+
+                    span {
+                        font-weight: 500;
+                        font-size: 18px;
+                        line-height: 140%;
+                        letter-spacing: 0.4px;
+                        font-feature-settings: 'pnum'on,
+                        'lnum'on;
+                        color: #FFFFFF;
+                    }
+
+
+
+                    .anticon-copy {
+                        margin-left: 8px;
+                        display: flex;
+                        align-items: center;
+
+                        svg {
+                            width: 18px;
+                            height: 18px;
+                            opacity: 0.7;
+                        }
+                    }
+                }
+
+                .btn-group {
+                    margin-top: 84px;
+                    margin-bottom: 58px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    .btn-disconnect {
+                        height: 58px;
+                        width: 246px;
+                        border-radius: 6px;
+                    }
+
+                    .btn-explore {
+                        margin-top: 44px;
+                        display: flex;
+                        align-items: center;
+                        font-weight: 300;
+                        font-size: 16px;
+                        line-height: 140%;
+                        letter-spacing: 0.4px;
+                        text-decoration-line: underline;
+                        font-feature-settings: 'pnum'on,
+                        'lnum'on;
+                        color: #FFFFFF;
+
+
+                        img {
+                            margin-right: 8px;
+                            width: 24px;
+                        }
+                    }
+                }
+
+                .btn-explore {
+                    display: flex;
+                    align-items: center;
+
+                    img {
+                        width: 24px;
+                    }
+                }
+            }
+
+            .logout {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 50px 0;
+
+                .ant-btn {
+                    width: 320px;
+                    height: 88px;
+                    background: #21242b;
+                    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08);
+                    border-radius: 40px;
+                    border: none;
+
+                    &:nth-child(n + 2) {
+                        margin-top: 16px;
+                    }
+
+                    img {
+                        width: 260px;
+                        object-fit: contain;
+                    }
+                }
+            }
+        }
+    }
+
+);
