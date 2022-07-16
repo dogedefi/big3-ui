@@ -10,6 +10,7 @@
   },
   "packages": [
     "packages/big3-web3",
-    "packages/big3-web3-assets"
+    "packages/big3-web3-assets",
+    "packages/big3-web3-umi-plugin"
   ]
 }
