@@ -1,0 +1,12 @@
+{
+  "name": "big3-web3-assets",
+  "version": "1.0.0",
+  "description": "Big3 web3 assets",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:dogedefi/big3-ui.git"
+  },
+  "keywords": [
+    "web3"
+  ]
+}
