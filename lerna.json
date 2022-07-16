@@ -3,12 +3,8 @@
   "npmClient": "yarn",
   "command": {
     "publish": {
-      "ignoreChanges": [
-        "*.md"
-      ]
+      "ignoreChanges": ["*.md"]
     }
   },
-  "packages": [
-    "packages/*"
-  ]
+  "packages": []
 }
