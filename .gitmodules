@@ -1,0 +1,3 @@
+[submodule "packages/react-fast-marquee"]
+	path = packages/react-fast-marquee
+	url = git@github.com:dogedefi/react-fast-marquee.git
