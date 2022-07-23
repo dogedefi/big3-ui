@@ -1,0 +1,37 @@
+{
+  "name": "big3-adaptive-media-loader",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "module": "dist/big3-big3-adaptive-media-loader.esm.js",
+  "typings": "dist/index.d.ts",
+  "description": "Big3 auto concat adaptive media codes",
+  "license": "GPL-3.0-or-later",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:dogedefi/big3-ui.git"
+  },
+  "keywords": [
+    "web3",
+    "umi"
+  ],
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "lint": "tsdx lint src"
+  },
+  "peerDependencies": {
+    "loader-utils": "1.x"
+  },
+  "dependencies": {
+    "tiny-invariant": "^1.0.6",
+    "loader-utils": "1.4.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.21",
+    "rollup-plugin-svg": "^2.0.0",
+    "tsdx": "^0.11.0"
+  }
+}
