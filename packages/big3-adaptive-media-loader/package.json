@@ -1,6 +1,6 @@
 {
   "name": "big3-adaptive-media-loader",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/index.js",
   "module": "dist/big3-big3-adaptive-media-loader.esm.js",
   "typings": "dist/index.d.ts",
@@ -26,11 +26,11 @@
     "loader-utils": "1.x"
   },
   "dependencies": {
-    "tiny-invariant": "^1.0.6",
-    "loader-utils": "1.4.0"
+    "tiny-invariant": "^1.0.6"
   },
   "devDependencies": {
     "@types/jest": "^24.0.21",
+    "loader-utils": "1.4.0",
     "rollup-plugin-svg": "^2.0.0",
     "tsdx": "^0.11.0"
   }
