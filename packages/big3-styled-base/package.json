@@ -1,0 +1,43 @@
+{
+  "name": "big3-styled-base",
+  "version": "1.0.1",
+  "main": "dist/index.js",
+  "module": "dist/big3-styled-base.esm.js",
+  "typings": "dist/index.d.ts",
+  "description": "Big3 base components",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:dogedefi/big3-ui.git"
+  },
+  "keywords": [
+    "web3",
+    "metamask",
+    "umi"
+  ],
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "lint": "tsdx lint src"
+  },
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "lodash.kebabcase": "^4.1.1",
+    "tiny-invariant": "^1.0.6"
+  },
+  "peerDependencies": {
+    "react": "17.x",
+    "wired-styled-px2vw": "x"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.21",
+    "@types/lodash.kebabcase": "^4.1.7",
+    "@types/react": "^16.9.11",
+    "@types/react-dom": "^16.9.4",
+    "react": ">=16.8",
+    "react-dom": ">=16.8",
+    "tsdx": "^0.11.0"
+  }
+}
