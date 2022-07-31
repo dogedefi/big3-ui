@@ -1,3 +1,6 @@
 [submodule "packages/react-fast-marquee"]
 	path = packages/react-fast-marquee
 	url = git@github.com:dogedefi/react-fast-marquee.git
+[submodule "packages/wired-styled-px2vw"]
+	path = packages/wired-styled-px2vw
+	url = git@github.com:dogedefi/wired-styled-px2vw.git
