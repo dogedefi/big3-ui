@@ -32,7 +32,7 @@ export const baseCss = (style: CSSProperties) => css`
       if (/weight/i.test(cssKey)) {
         return `${accumulator}${cssKey}:${cssValue};`
       }
-      if (/^[\d\.]+$/.test(cssValue)) {
+      if (/^[\d\.-]+$/.test(cssValue)) {
         return `${accumulator}${cssKey}:${cssValue}px;`
       }
       return `${accumulator}${cssKey}:${cssValue};`
