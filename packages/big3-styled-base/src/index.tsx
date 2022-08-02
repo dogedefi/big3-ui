@@ -1,6 +1,7 @@
 import { css } from 'wired-styled-px2vw'
 import { CSSProperties } from 'react'
 import kebabCase from 'lodash.kebabcase'
+import { FlexCss } from './interface'
 
 export const settleCss = (source: any, _default?: any) => {
   _default = typeof _default === 'number' ? `${_default}px` : _default
@@ -56,3 +57,6 @@ export const textCss = (props: CSSProperties) => css`
   word-break: keep-all;
   white-space: nowrap;
 `
+
+export * from './base'
+export * from './animation'
