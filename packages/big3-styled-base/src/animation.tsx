@@ -131,16 +131,21 @@ export const withFadeEffect = (Component: any, offset?: FadeAnimationOffset) => 
   return EnhancedComponent
 }
 
-export const withHeaderEffect = (Header: any, background = 'rgba(255, 255, 255, 1)') => {
+export const withHeaderEffect = (
+  Header: any,
+  rgb: string /* example: '255,255,255' */,
+  fixedOpacity = false
+) => {
   const EnhancedComponent: FC<{ selector: string } & Big3Props<HTMLDivElement> & typeof Header> = (props) => {
     const { ...rest } = props
     const headerRef = useRef<HTMLElement>(document.createElement('header'))
+    rgb = rgb || '255,255,255'
 
     useEffect(() => {
       const callback = throttle(() => {
-        headerRef.current.style.background = location.pathname.startsWith('/dapp')
-          ? background
-          : `${background}, ${Math.min(1, window.scrollY / 100)})`
+        headerRef.current.style.background = fixedOpacity
+          ? `rgba(${rgb}, 1)`
+          : `rgba(${rgb}, ${Math.min(1, window.scrollY / 100)})`
         headerRef.current.style.boxShadow = `2px 2px 14px rgba(211, 198, 252, ${Math.min(0.43, window.scrollY / 100)})`
       }, 100)
 
