@@ -91,3 +91,11 @@ export const Big3Avatar = styled.img<Big3Props<HTMLImageElement>>`
   ${(props) => baseCss(props)}
   border-radius: 50%;
 `
+
+export const Big3Box = styled.div<Big3Props<HTMLDivElement>>`
+  ${(props) => baseCss(props)}
+`
+
+export const Big3FlexBox = styled.div<Big3Props<HTMLDivElement> & FlexCss>`
+  ${(props) => flexCss(props)}
+`
