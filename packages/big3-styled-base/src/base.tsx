@@ -73,3 +73,21 @@ export const Big3NavLink = styled(Big3Link)`
     color: ${(props) => settleCss(props.color, 'black')};
   }
 `
+
+export const Big3Image = styled.img<Big3Props<HTMLImageElement>>`
+  ${(props) => baseCss(props)}
+  display: block;
+  object-fit: contain;
+  flex-shrink: 0;
+`
+
+export const Big3Icon = styled.img<Big3Props<HTMLImageElement>>`
+  ${(props) => baseCss(props)}
+  width: ${(props) => settleCss(props.size, 'auto')};
+  height: ${(props) => settleCss(props.size, 'auto')};
+`
+
+export const Big3Avatar = styled.img<Big3Props<HTMLImageElement>>`
+  ${(props) => baseCss(props)}
+  border-radius: 50%;
+`
