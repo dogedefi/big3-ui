@@ -9,8 +9,8 @@ export interface Big3Props<T>
     React.HTMLAttributes<T> {}
 
 export interface FlexCss {
-  column: boolean
-  wrap: Property.FlexWrap | undefined
-  justify: Property.JustifyContent | undefined
-  align: Property.AlignItems | undefined
+  column?: boolean
+  wrap?: Property.FlexWrap | undefined
+  justify?: Property.JustifyContent | undefined
+  align?: Property.AlignItems | undefined
 }
