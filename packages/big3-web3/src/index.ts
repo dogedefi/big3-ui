@@ -1,74 +1,71 @@
 // initial chain info
-import { useEffect, useState } from "react";
-import { chainLocalKey } from "./config";
-import { chains } from "./config/chains";
-import { Chain as DataType, ChainConfig } from "./config/types";
-import { setupNetwork, checkIfMatch, getProvider } from "./utils/network";
+import { useEffect, useState } from 'react'
+import { chainLocalKey } from './config'
+import { chains } from './config/chains'
+import { Chain as DataType, ChainConfig } from './config/types'
+import { setupNetwork, checkIfMatch, getProvider } from './utils/network'
+import ethers from 'ethers'
+import sample from 'lodash.sample'
 
-const defaultChain: DataType = {
-  name: (Object.values(chains)[0] as ChainConfig).chainName,
-  config: Object.values(chains)[0] as ChainConfig,
-};
+const defaultChain = Object.values(chains)[0] as ChainConfig
 
 export const initChainModel = () => {
-  const [matched, setMatched] = useState(false);
-  const [accounts, setAccounts] = useState<string[]>([]);
-  const [chainChanged, setChainChanged] = useState(false);
-  const [accountsChanged, setAccountsChanged] = useState(false);
-  const [allNotConnected, setAllNotConnected] = useState(false);
-  const [accountDisconnected, setAccountDisconnected] = useState(false);
-  const [accountConnected, setAccountConnected] = useState(false);
-  const [chain, setChain] = useState<DataType>(defaultChain);
+  const [matched, setMatched] = useState(false)
+  const [accounts, setAccounts] = useState<string[]>([])
+  const [chainChanged, setChainChanged] = useState(false)
+  const [accountsChanged, setAccountsChanged] = useState(false)
+  const [allNotConnected, setAllNotConnected] = useState(false)
+  const [accountDisconnected, setAccountDisconnected] = useState(false)
+  const [accountConnected, setAccountConnected] = useState(false)
+  const [chain, setChain] = useState<DataType>({ name: defaultChain.chainName, config: defaultChain })
 
   // initial chain config
   useEffect(() => {
-    let chainConfig = localStorage.getItem(chainLocalKey);
+    let chainConfig = localStorage.getItem(chainLocalKey)
 
     if (!chainConfig) {
-      // TODO explore way if switch
-      // setupNetwork(defaultChain);
-      checkIfMatch(defaultChain).then((res) => setMatched(res));
-    } else if (chainConfig.startsWith("{") && chainConfig.endsWith("}")) {
-      const cachedChain = JSON.parse(chainConfig);
-      setChain(cachedChain);
-      checkIfMatch(cachedChain).then((res) => setMatched(res));
-      setupNetwork(cachedChain);
+      checkIfMatch({ name: defaultChain.chainName, config: defaultChain }).then((res) => setMatched(res))
+    } else if (/^{(.*)}$/.test(chainConfig)) {
+      const cachedChain = JSON.parse(chainConfig)
+      setChain(cachedChain)
+      checkIfMatch(cachedChain).then((res) => setMatched(res))
+      setupNetwork(cachedChain)
     } else {
-      localStorage.clear();
-      location.reload();
+      localStorage.clear()
+      location.reload()
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
-    (async () => {
-      const provider: any = getProvider();
+    ;(async () => {
+      const provider: any = getProvider()
       if (provider) {
-        const accounts = await provider.request({ method: "eth_accounts" });
-        setAccounts(accounts);
+        const accounts = await provider.request({ method: 'eth_accounts' })
+        setAccounts(accounts)
       }
-    })();
-  }, []);
+    })()
+  }, [])
 
   useEffect(() => {
-    const provider: any = getProvider();
-    const handleChainChanged = () => setChainChanged(true);
+    const provider: any = getProvider()
+    const handleChainChanged = () => setChainChanged(true)
     const handleAccountsChanged = (_accounts: string[]) => {
-      setAllNotConnected(_accounts.length === 0);
-      setAccountDisconnected(_accounts.length < accounts.length);
-      setAccountConnected(_accounts.length > accounts.length);
-      setAccountsChanged(true);
-    };
+      setAllNotConnected(_accounts.length === 0)
+      setAccountDisconnected(_accounts.length < accounts.length)
+      setAccountConnected(_accounts.length > accounts.length)
+      setAccountsChanged(true)
+    }
 
     if (provider) {
-      provider.on("chainChanged", handleChainChanged);
-      provider.on("accountsChanged", handleAccountsChanged);
+      provider.on('chainChanged', handleChainChanged)
+      provider.on('accountsChanged', handleAccountsChanged)
     }
 
     return () => {
-      provider.removeListener("chainChanged", handleChainChanged);
-      provider.removeListener("accountsChanged", handleAccountsChanged);
-    };
-  }, [accounts]);
+      provider.removeListener('chainChanged', handleChainChanged)
+      provider.removeListener('accountsChanged', handleAccountsChanged)
+    }
+  }, [accounts])
 
   return {
     chain,
@@ -80,21 +77,28 @@ export const initChainModel = () => {
     allNotConnected, // no account is connected
     accountDisconnected, // deactive account
     accountConnected, // active account
-  };
-};
+  }
+}
+
+export const SimpleProviderFactory = {
+  create(rpcUrl: string | string[]) {
+    return new ethers.providers.JsonRpcProvider(sample(rpcUrl))
+  },
+}
 
 // export
-export { Config, Chain } from "./config/types";
-export { default as connectors } from "./config/wallet";
-export { chains } from "./config/chains";
-export * from "./config";
+export { Config, Chain } from './config/types'
+export { default as connectors } from './config/wallet'
+export { chains } from './config/chains'
+export * from './config'
 
-export { default as useAuth } from "./useAuth";
-export { default as useWallet } from "./useWallet";
-export { default as useChain } from "./useChain";
-export { default as useEagerConnect } from "./useEagerConnect";
+export { default as useAuth } from './useAuth'
+export { default as useWallet } from './useWallet'
+export { default as useChain } from './useChain'
+export { default as useEagerConnect } from './useEagerConnect'
+export { default as useWeb3Provider } from './useWeb3Provider'
 
-export { getLibrary, ConnectorNames, connectorsByName } from "./utils/web3";
-export { setupNetwork } from "./utils/network";
+export { getLibrary, ConnectorNames, connectorsByName } from './utils/web3'
+export { setupNetwork } from './utils/network'
 
-export * from "@web3-react/core";
+export * from '@web3-react/core'

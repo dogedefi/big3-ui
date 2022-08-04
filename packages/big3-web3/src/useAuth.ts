@@ -3,11 +3,11 @@ import { useWeb3React, UnsupportedChainIdError } from '@web3-react/core'
 import { NoBscProviderError } from '@binance-chain/bsc-connector'
 import {
   NoEthereumProviderError,
-  UserRejectedRequestError as UserRejectedRequestErrorInjected
+  UserRejectedRequestError as UserRejectedRequestErrorInjected,
 } from '@web3-react/injected-connector'
 import {
   UserRejectedRequestError as UserRejectedRequestErrorWalletConnect,
-  WalletConnectConnector
+  WalletConnectConnector,
 } from '@web3-react/walletconnect-connector'
 import { ConnectorNames, connectorsByName } from './utils/web3'
 import { setupNetwork } from './utils/network'
@@ -29,20 +29,18 @@ const useAuth = () => {
           } else {
             window.localStorage.removeItem(connectorLocalStorageKey)
             if (error instanceof NoEthereumProviderError || error instanceof NoBscProviderError) {
-              setError(new Error("Provider error, no provider was found"));
+              setError(new Error('Provider error, no provider was found'))
             } else if (
               error instanceof UserRejectedRequestErrorInjected ||
               error instanceof UserRejectedRequestErrorWalletConnect
             ) {
               if (connector instanceof WalletConnectConnector) {
                 const walletConnector = connector as WalletConnectConnector
-                walletConnector.walletConnectProvider = null
+                walletConnector.walletConnectProvider = undefined
               }
-              setError(
-                new Error("Authorization Error, Please authorize to access your account")
-              );
+              setError(new Error('Authorization Error, Please authorize to access your account'))
             } else {
-              setError(error);
+              setError(error)
             }
           }
         })
@@ -58,12 +56,12 @@ const useAuth = () => {
     // This localStorage key is set by @web3-react/walletconnect-connector
     if (window.localStorage.getItem('walletconnect')) {
       connectorsByName[ConnectorNames.WalletConnect].close()
-      connectorsByName[ConnectorNames.WalletConnect].walletConnectProvider = null
+      connectorsByName[ConnectorNames.WalletConnect].walletConnectProvider = undefined
     }
-    window.location.reload();
+    window.location.reload()
   }, [deactivate])
 
-  return { login, logout, error };
+  return { login, logout, error }
 }
 
 export default useAuth

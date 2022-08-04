@@ -1,47 +1,43 @@
-import { useEffect } from "react";
-import useAuth from "./useAuth";
-import { connectorLocalStorageKey, ConnectorNames } from ".";
+import { useEffect } from 'react'
+import useAuth from './useAuth'
+import { connectorLocalStorageKey, ConnectorNames } from '.'
 
 const _binanceChainListener = async () =>
   new Promise<void>((resolve) =>
-    Object.defineProperty(window, "BinanceChain", {
+    Object.defineProperty(window, 'BinanceChain', {
       get() {
-        return this.bsc;
+        return this.bsc
       },
       set(bsc) {
-        this.bsc = bsc;
-
-        resolve();
+        this.bsc = bsc
+        resolve()
       },
     })
-  );
+  )
 
 // connect wallet eagerly
-const useEagerConnect = (signed = true) => {
-  const { login, error } = useAuth();
+const useEagerConnect = (connectEagerly = true) => {
+  const { login, error } = useAuth()
 
   useEffect(() => {
-    const connectorId = window.localStorage.getItem(
-      connectorLocalStorageKey
-    ) as ConnectorNames;
+    const connectorId = window.localStorage.getItem(connectorLocalStorageKey) as ConnectorNames
 
-    if (connectorId && signed) {
-      const isConnectorBinanceChain = connectorId === ConnectorNames.BSC;
-      const isBinanceChainDefined = Reflect.has(window, "BinanceChain");
+    if (connectorId && connectEagerly) {
+      const isConnectorBinanceChain = connectorId === ConnectorNames.BSC
+      const isBinanceChainDefined = Reflect.has(window, 'BinanceChain')
 
       // Currently BSC extension doesn't always inject in time.
       // We must check to see if it exists, and if not, wait for it before proceeding.
       if (isConnectorBinanceChain && !isBinanceChainDefined) {
-        _binanceChainListener().then(() => login(connectorId));
-
-        return;
+        _binanceChainListener().then(() => login(connectorId))
+        return
       }
 
-      login(connectorId);
+      login(connectorId)
     }
-  }, [login]);
+  }, [login])
 
-  return { error };
-};
+  return { error }
+}
 
-export default useEagerConnect;
+export default useEagerConnect
