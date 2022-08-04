@@ -60,3 +60,4 @@ export const textCss = (props: CSSProperties) => css`
 
 export * from './base'
 export * from './animation'
+export { default as Big3PortalNode } from './components/Big3PortalNode'
