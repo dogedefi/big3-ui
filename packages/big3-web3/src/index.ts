@@ -4,7 +4,7 @@ import { chainLocalKey } from './config'
 import { chains } from './config/chains'
 import { Chain as DataType, ChainConfig } from './config/types'
 import { setupNetwork, checkIfMatch, getProvider } from './utils/network'
-import ethers from 'ethers'
+import { ethers } from 'ethers'
 import sample from 'lodash.sample'
 
 const defaultChain = Object.values(chains)[0] as ChainConfig

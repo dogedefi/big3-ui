@@ -1,6 +1,6 @@
 {
   "name": "big3-web3",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/index.js",
   "module": "dist/big3-web3.esm.js",
   "typings": "dist/index.d.ts",
@@ -32,8 +32,8 @@
     "tiny-invariant": "^1.0.6"
   },
   "peerDependencies": {
-    "ethers": "^5.4.1",
-    "react": "17.x"
+    "ethers": ">=5.x",
+    "react": ">=17.x"
   },
   "devDependencies": {
     "@binance-chain/bsc-connector": "^1.0.0",
