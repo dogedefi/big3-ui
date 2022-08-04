@@ -22,7 +22,9 @@ export const baseCss = (style: CSSProperties) => css`
   color: inherit;
   ${Object.keys(style).reduce((accumulator, key) => {
     if (
-      /width|height|margin|padding|font|text|color|cursor|flex|background|transform|top|bottom|right|left/i.test(key)
+      /width|height|margin|padding|font|text|color|cursor|flex|background|transform|top|bottom|right|left|position/i.test(
+        key
+      )
     ) {
       // transform the key from camelCase to kebab-case
       const cssKey = kebabCase(key)
