@@ -4,3 +4,6 @@
 [submodule "packages/wired-styled-px2vw"]
 	path = packages/wired-styled-px2vw
 	url = git@github.com:dogedefi/wired-styled-px2vw.git
+[submodule "packages/zip-webpack-plugin"]
+	path = packages/zip-webpack-plugin
+	url = git@github.com:dogedefi/zip-webpack-plugin.git
