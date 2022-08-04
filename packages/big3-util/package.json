@@ -1,0 +1,35 @@
+{
+  "name": "big3-util",
+  "version": "1.2.6",
+  "main": "dist/index.js",
+  "module": "dist/big3-util.esm.js",
+  "typings": "dist/index.d.ts",
+  "description": "Big3 utils",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:dogedefi/big3-ui.git"
+  },
+  "keywords": [
+    "web3",
+    "metamask"
+  ],
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "lint": "tsdx lint src"
+  },
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "tiny-invariant": "^1.0.6"
+  },
+  "peerDependencies": {
+    "umi": "x"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.21",
+    "tsdx": "^0.11.0"
+  }
+}
