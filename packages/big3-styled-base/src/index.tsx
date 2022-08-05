@@ -22,7 +22,7 @@ export const baseCss = (style: CSSProperties) => css`
   color: inherit;
   ${Object.keys(style).reduce((accumulator, key) => {
     if (
-      /width|height|margin|padding|font|text|color|cursor|flex|background|transform|top|bottom|right|left|position/i.test(
+      /width|height|margin|padding|font|text|color|cursor|flex|background|transform|top|bottom|right|left|position|overflow|transition|opacity|animation|zindex/i.test(
         key
       )
     ) {
@@ -32,7 +32,7 @@ export const baseCss = (style: CSSProperties) => css`
       const cssValue = String(style[key as keyof CSSProperties]).replace("'", '')
       // build the result
       // you can break the line, add indent for it if you need
-      if (/weight/i.test(cssKey)) {
+      if (/weight|opacity|duration|transition|z-index/i.test(cssKey)) {
         return `${accumulator}${cssKey}:${cssValue};`
       }
       if (/^[\d\.-]+$/.test(cssValue)) {
