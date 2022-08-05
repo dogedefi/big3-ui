@@ -7,3 +7,6 @@
 [submodule "packages/zip-webpack-plugin"]
 	path = packages/zip-webpack-plugin
 	url = git@github.com:dogedefi/zip-webpack-plugin.git
+[submodule "packages/big3-new-component"]
+	path = packages/big3-new-component
+	url = git@github.com:dogedefi/big3-new-component.git
