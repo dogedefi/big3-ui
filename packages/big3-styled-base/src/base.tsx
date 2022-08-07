@@ -103,3 +103,18 @@ export const Big3Box = styled.div<Big3Props<HTMLDivElement>>`
 export const Big3FlexBox = styled.div<Big3Props<HTMLDivElement> & FlexCss>`
   ${props => flexCss(props)}
 `
+
+export const Big3SnapContainer = styled.div<Big3Props<HTMLDivElement>>`
+  ${props => baseCss(props)}
+  height: 100vh;
+  width: 100vw;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+`
+
+export const Big3SnapPage = styled.div<Big3Props<HTMLDivElement>>`
+  ${props => baseCss(props)}
+  height: 100vh;
+  overflow-y: auto;
+  scroll-snap-align: center;
+`
