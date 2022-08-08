@@ -22,7 +22,7 @@ export const baseCss = (style: CSSProperties) => css`
   color: inherit;
   ${Object.keys(style).reduce((accumulator, key) => {
     if (
-      /justify|align|scroll|display|width|height|margin|padding|font|text|color|cursor|flex|background|transform|top|bottom|right|left|position|overflow|transition|opacity|animation|zindex/i.test(
+      /border|justify|align|scroll|display|width|height|margin|padding|font|text|color|cursor|flex|background|transform|top|bottom|right|left|position|overflow|transition|opacity|animation|zindex/i.test(
         key
       )
     ) {
