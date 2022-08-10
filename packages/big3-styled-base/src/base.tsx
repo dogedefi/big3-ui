@@ -33,7 +33,7 @@ export const Big3Paragraph = styled.p<Big3Props<HTMLParagraphElement>>`
 
 export const Big3Text = styled.span<Big3Props<HTMLSpanElement>>`
   ${props => textCss(props)}
-  display: inline-block;
+  display: ${props => settleCss(props.display, 'inline-block')};
   flex-shrink: 0;
 `
 
