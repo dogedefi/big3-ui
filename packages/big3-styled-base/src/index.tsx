@@ -45,19 +45,19 @@ export const baseCss = (style: CSSProperties) => css`
 `
 
 export const flexCss = (props: CSSProperties & FlexCss) => css`
-  ${baseCss(props)}
   display: flex;
   flex-wrap: ${settleCss(props.wrap, 'nowrap')};
   flex-direction: ${props.column ? 'column' : 'row'};
   justify-content: ${settleCss(props.justify, 'flex-start')};
   align-items: ${settleCss(props.align, 'flex-start')};
+  ${baseCss(props)}
 `
 
 export const textCss = (props: CSSProperties) => css`
-  ${baseCss(props)}
   font-style: normal;
   word-break: ${settleCss(props.wordBreak, 'keep-all')};
   white-space: ${settleCss(props.whiteSpace, 'nowrap')};
+  ${baseCss(props)}
 `
 
 export * from './base'

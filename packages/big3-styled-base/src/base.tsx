@@ -20,7 +20,6 @@ export const Big3Page = styled.main<Big3Props<HTMLBaseElement>>`
 `
 
 export const Big3Paragraph = styled.p<Big3Props<HTMLParagraphElement>>`
-  ${props => textCss(props)};
   word-break: keep-all;
   white-space: normal;
   display: -webkit-box;
@@ -29,12 +28,13 @@ export const Big3Paragraph = styled.p<Big3Props<HTMLParagraphElement>>`
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  ${props => textCss(props)};
 `
 
 export const Big3Text = styled.span<Big3Props<HTMLSpanElement>>`
-  ${props => textCss(props)}
-  display: ${props => settleCss(props.display, 'inline-block')};
+  display: inline-block;
   flex-shrink: 0;
+  ${props => textCss(props)}
 `
 
 const _createHeadingElement = ({
@@ -43,23 +43,22 @@ const _createHeadingElement = ({
   ...rest
 }: Big3Props<HTMLHeadingElement> & { type?: Heading }) => createElement(type, rest, children)
 export const Big3Heading = styled(_createHeadingElement)`
-  ${props => textCss(props)};
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  ${props => textCss(props)};
 `
 
 export const Big3Link = styled.a<Big3Props<HTMLAnchorElement> & FlexCss>`
+  flex-shrink: 0;
   ${props => textCss(props)};
   ${props => flexCss(props)};
-  flex-shrink: 0;
 `
 
-export const Big3List = styled.ul<Big3Props<HTMLUListElement> & FlexCss>`
-  ${props => flexCss(props)};
-  max-height: ${props => settleCss(props.height, 'auto')};
-  flex-direction: column;
+export const Big3List = styled.ul.attrs({ column: true })<Big3Props<HTMLUListElement> & FlexCss>`
+  max-height: auto;
   overflow: auto;
+  ${props => flexCss(props)};
 `
 
 export const Big3ListItem = styled.li<Big3Props<HTMLLIElement> & FlexCss>`
@@ -81,10 +80,10 @@ export const Big3NavLink = styled(Big3Link)`
 `
 
 export const Big3Image: FC<Big3Props<HTMLImageElement>> = styled.img`
-  ${props => baseCss(props)}
   display: block;
   object-fit: contain;
   flex-shrink: 0;
+  ${props => baseCss(props)}
 `
 
 export const Big3Icon = styled(Big3Image)`
@@ -105,7 +104,6 @@ export const Big3FlexBox = styled.div<Big3Props<HTMLDivElement> & FlexCss>`
 `
 
 export const Big3SnapContainer = styled.div<Big3Props<HTMLDivElement>>`
-  ${props => baseCss(props)}
   height: 100vh;
   width: 100vw;
   overflow-y: scroll;
@@ -113,8 +111,8 @@ export const Big3SnapContainer = styled.div<Big3Props<HTMLDivElement>>`
 `
 
 export const Big3SnapPage = styled.div<Big3Props<HTMLDivElement>>`
-  ${props => baseCss(props)}
   height: 100vh;
   overflow-y: auto;
   scroll-snap-align: center;
+  ${props => baseCss(props)}
 `
