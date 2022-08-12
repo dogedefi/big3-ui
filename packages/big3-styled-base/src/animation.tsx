@@ -72,17 +72,17 @@ export const withFadeEffect = (Component: any, offset?: FadeAnimationOffset) => 
         opacity: 0;
       }
     }
-    ${(props) => css`
+    ${props => css`
       ${props.state === 'in' &&
-      props.placement === 'top' &&
-      css`
-        animation: textTopFadeIn 0.7s ease-in forwards;
-      `}
+        props.placement === 'top' &&
+        css`
+          animation: textTopFadeIn 0.7s ease-in forwards;
+        `}
       ${props.state === 'out' &&
-      props.placement === 'top' &&
-      css`
-        animation: textTopFadeOut 0.7s ease-in forwards;
-      `}
+        props.placement === 'top' &&
+        css`
+          animation: textTopFadeOut 0.7s ease-in forwards;
+        `}
 
     ${props.state === 'in' &&
       props.placement === 'bottom' &&
@@ -96,14 +96,12 @@ export const withFadeEffect = (Component: any, offset?: FadeAnimationOffset) => 
       `}
     `};
   `
-  const EnhancedComponent: FC<
-    {
-      selector: string
-      onCheck: (intersectionRatio: number) => FadeAnimationState
-      threshold: number | number[]
-    } & FadeAnimation &
-      typeof Component
-  > = (props) => {
+  const EnhancedComponent: FC<{
+    selector: string
+    onCheck: (intersectionRatio: number) => FadeAnimationState
+    threshold: number | number[]
+  } & FadeAnimation &
+    typeof Component> = props => {
     const [domAnimate, setDomAnimate] = useState<FadeAnimationState | null>(null)
     const { selector, onCheck, threshold, placement, delay, ...rest } = props
 
@@ -163,25 +161,23 @@ export const withButtonFadeEffect = (Component: any, offset?: FadeAnimationOffse
         opacity: 0;
       }
     }
-    ${(props) => css`
+    ${props => css`
       ${props.state === 'in' &&
-      css`
-        animation: buttonFadeIn 0.7s linear forwards;
-      `}
+        css`
+          animation: buttonFadeIn 0.7s linear forwards;
+        `}
       ${props.state === 'out' &&
-      css`
-        animation: buttonFadeOut 0.7s linear forwards;
-      `}
+        css`
+          animation: buttonFadeOut 0.7s linear forwards;
+        `}
     `};
   `
-  const EnhancedComponent: FC<
-    {
-      selector: string
-      onCheck: (intersectionRatio: number) => FadeAnimationState
-      threshold: number | number[]
-    } & FadeAnimation &
-      typeof Component
-  > = (props) => {
+  const EnhancedComponent: FC<{
+    selector: string
+    onCheck: (intersectionRatio: number) => FadeAnimationState
+    threshold: number | number[]
+  } & FadeAnimation &
+    typeof Component> = props => {
     const [domAnimate, setDomAnimate] = useState<FadeAnimationState | null>(null)
     const { selector, onCheck, threshold, placement, delay, ...rest } = props
 
@@ -205,13 +201,15 @@ export const withButtonFadeEffect = (Component: any, offset?: FadeAnimationOffse
 }
 
 export const withHeaderEffect = (Header: any, rgb: string /* example: '255,255,255' */, fixedOpacity = false) => {
-  const EnhancedComponent: FC<{ selector: string } & Big3Props<HTMLDivElement> & typeof Header> = (props) => {
+  const EnhancedComponent: FC<{ selector: string } & Big3Props<HTMLDivElement> & typeof Header> = props => {
     const { ...rest } = props
     const headerRef = useRef<HTMLElement>(document.createElement('header'))
     rgb = rgb || '255,255,255'
 
     useEffect(() => {
       const callback = throttle(() => {
+        if (!headerRef.current) return
+
         headerRef.current.style.background = fixedOpacity
           ? `rgba(${rgb}, 1)`
           : `rgba(${rgb}, ${Math.min(1, window.scrollY / 100)})`
