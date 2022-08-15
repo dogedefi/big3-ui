@@ -3,7 +3,8 @@ interface Ethereum {
   enable: () => Promise<string[]>
   on?: (method: string, listener: (...args: any[]) => void) => void
   removeListener?: (method: string, listener: (...args: any[]) => void) => void
-  request: (...args: any[]) => any
+  request: (...args: any[]) => any,
+  isMetaMask: boolean,
 }
 
 interface BinanceChain {

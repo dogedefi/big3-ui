@@ -5,11 +5,27 @@ import { connectorLocalStorageKey } from "../config";
 
 export const chainLocalKey = "chain";
 
-export const getProvider = (): Ethereum | BinanceChain | undefined => {
-  const connectorId = localStorage.getItem(connectorLocalStorageKey);
-  return connectorId === ConnectorNames.BSC
-    ? window.BinanceChain || window.ethereum // The plugin may not be installed
-    : window.ethereum;
+enum OverrideProviderMap {
+  METAMASK = 'MetaMask',
+  COINBASE = "CoinbaseWallet"
+};
+
+const checkProvider = (ethereum: any): Ethereum | undefined => {
+  if (ethereum.overrideIsMetaMask) {
+    return ethereum.providerMap.get(OverrideProviderMap.METAMASK) || Array.from(ethereum.providerMap.values())[0]
+  }
+  
+  if (ethereum.isMetaMask) {
+    return ethereum;
+  }
+  
+  return undefined;
+}
+
+export const getProvider = (connectorId?: string): Ethereum | BinanceChain | undefined => {
+  return connectorId || localStorage.getItem(connectorLocalStorageKey) === ConnectorNames.BSC
+    ? window.BinanceChain || checkProvider(window.ethereum) // The plugin may not be installed
+    : checkProvider(window.ethereum)
 };
 
 export const checkIfMatch = async (chain?: Chain) => {
@@ -39,11 +55,7 @@ export const setupNetwork = async (chain?: Chain) => {
   }
 
   // support binance wallet
-  const connectorId = localStorage.getItem(connectorLocalStorageKey);
-  const provider: Ethereum | BinanceChain | undefined =
-    connectorId === ConnectorNames.BSC && !isSwitching
-      ? window.BinanceChain || window.ethereum // The plugin may not be installed
-      : window.ethereum;
+  const provider = getProvider();
 
   if (provider) {
     try {

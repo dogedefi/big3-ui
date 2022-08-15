@@ -1,6 +1,6 @@
 {
   "name": "big3-web3",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "dist/index.js",
   "module": "dist/big3-web3.esm.js",
   "typings": "dist/index.d.ts",
