@@ -1,5 +1,5 @@
 import { Big3Props, FlexCss, Heading } from './interface'
-import styled from 'wired-styled-px2vw'
+import styled, { css } from 'wired-styled-px2vw'
 import { baseCss, textCss, flexCss, settleCss } from '.'
 import { createElement, FC } from 'react'
 
@@ -65,8 +65,15 @@ export const Big3ListItem = styled.li<Big3Props<HTMLLIElement> & FlexCss>`
   ${props => flexCss(props)};
 `
 
-export const Big3Nav = styled.nav<Big3Props<HTMLBaseElement> & FlexCss>`
+export const Big3Nav = styled.nav<Big3Props<HTMLBaseElement> & FlexCss & { activeColor: string }>`
   ${props => flexCss(props)}
+  ${props =>
+    props.activeColor &&
+    css`
+      > a.active {
+        color: ${props.activeColor};
+      }
+    `};
 `
 
 export const Big3NavLink = styled(Big3Link)`
