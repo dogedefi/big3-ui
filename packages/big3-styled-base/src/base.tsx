@@ -34,6 +34,8 @@ export const Big3Paragraph = styled.p.attrs({ whiteSpace: 'pre-wrap' })<Big3Prop
 export const Big3Text = styled.span<Big3Props<HTMLSpanElement>>`
   display: inline-block;
   flex-shrink: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
   ${props => textCss(props)}
 `
 
