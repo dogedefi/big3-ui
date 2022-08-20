@@ -19,7 +19,7 @@ export const Big3Page = styled.main<Big3Props<HTMLBaseElement>>`
   ${props => baseCss(props)};
 `
 
-export const Big3Paragraph = styled.p<Big3Props<HTMLParagraphElement>>`
+export const Big3Paragraph = styled.p.attrs({ whiteSpace: 'pre-wrap' })<Big3Props<HTMLParagraphElement>>`
   word-break: keep-all;
   white-space: normal;
   display: -webkit-box;
