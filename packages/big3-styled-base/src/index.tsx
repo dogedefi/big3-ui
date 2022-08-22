@@ -32,7 +32,7 @@ export const baseCss = (style: CSSProperties) => css`
       const cssValue = String(style[key as keyof CSSProperties]).replace("'", '')
       // build the result
       // you can break the line, add indent for it if you need
-      if (/weight|opacity|z-index/i.test(cssKey)) {
+      if (/weight|opacity|z-index|flex/i.test(cssKey)) {
         return `${accumulator}${cssKey}:${cssValue};`
       }
       if (/^[\d\.-]+$/.test(cssValue)) {
