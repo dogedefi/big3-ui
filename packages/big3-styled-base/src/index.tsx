@@ -22,7 +22,7 @@ export const baseCss = (style: CSSProperties) => css`
   color: inherit;
   ${Object.keys(style).reduce((accumulator, key) => {
     if (
-      /visibility|grid|word|white|box|border|justify|align|scroll|display|width|height|margin|padding|font|text|color|cursor|flex|background|transform|top|bottom|right|left|position|overflow|transition|opacity|animation|zindex/i.test(
+      /visibility|letterSpacing|grid|word|white|box|border|justify|align|scroll|display|width|height|margin|padding|font|text|color|cursor|flex|background|transform|top|bottom|right|left|position|overflow|transition|opacity|animation|zindex/i.test(
         key
       )
     ) {
@@ -55,8 +55,6 @@ export const flexCss = (props: CSSProperties & FlexCss) => css`
 
 export const textCss = (props: CSSProperties) => css`
   font-style: normal;
-  word-break: ${settleCss(props.wordBreak, 'keep-all')};
-  white-space: ${settleCss(props.whiteSpace, 'nowrap')};
   ${baseCss(props)}
 `
 

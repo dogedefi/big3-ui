@@ -20,14 +20,14 @@ export const Big3Page = styled.main<Big3Props<HTMLBaseElement>>`
 `
 
 export const Big3Paragraph = styled.p.attrs({ whiteSpace: 'pre-wrap' })<Big3Props<HTMLParagraphElement>>`
-  word-break: keep-all;
-  white-space: normal;
   display: -webkit-box;
   -webkit-line-clamp: ${props => `${props.rows ?? 4}`}; /* number of lines to show */
   line-clamp: ${props => `${props.rows ?? 4}`};
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  word-break: ${props => settleCss(props.wordBreak, 'break-word')};
+  white-space: ${props => settleCss(props.whiteSpace, 'pre-wrap')};
   ${props => textCss(props)};
 `
 
@@ -36,6 +36,8 @@ export const Big3Text = styled.span<Big3Props<HTMLSpanElement>>`
   flex-shrink: 0;
   overflow: hidden;
   text-overflow: ellipsis;
+  word-break: ${props => settleCss(props.wordBreak, 'keep-all')};
+  white-space: ${props => settleCss(props.whiteSpace, 'nowrap')};
   ${props => textCss(props)}
 `
 
