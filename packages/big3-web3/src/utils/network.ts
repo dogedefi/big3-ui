@@ -11,11 +11,11 @@ enum OverrideProviderMap {
 };
 
 const checkProvider = (ethereum: any): Ethereum | undefined => {
-  if (ethereum.overrideIsMetaMask) {
+  if (ethereum?.overrideIsMetaMask) {
     return ethereum.providerMap.get(OverrideProviderMap.METAMASK) || Array.from(ethereum.providerMap.values())[0]
   }
   
-  if (ethereum.isMetaMask) {
+  if (ethereum?.isMetaMask) {
     return ethereum;
   }
   
