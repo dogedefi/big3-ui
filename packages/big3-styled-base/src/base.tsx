@@ -11,7 +11,7 @@ export const Big3Header = styled.header<Big3Props<HTMLBaseElement>>`
   ${props => baseCss(props)};
 `
 
-export const Big3Footer = styled.header<Big3Props<HTMLBaseElement>>`
+export const Big3Footer = styled.footer<Big3Props<HTMLBaseElement>>`
   ${props => baseCss(props)};
 `
 
