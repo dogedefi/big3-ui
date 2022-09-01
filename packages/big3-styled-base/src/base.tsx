@@ -55,8 +55,13 @@ export const Big3Heading = styled(_createHeadingElement)`
 
 export const Big3Link = styled.a<Big3Props<HTMLAnchorElement> & FlexCss>`
   flex-shrink: 0;
-  ${props => textCss(props)};
   ${props => flexCss(props)};
+
+  &.active,
+  &:hover {
+    -webkit-text-stroke-width: ${props => settleCss(props.strokeWidth, 0.666666)};
+    color: ${props => settleCss(props.color, 'black')};
+  }
 `
 
 export const Big3List = styled.ul.attrs({ column: true })<Big3Props<HTMLUListElement> & FlexCss>`
