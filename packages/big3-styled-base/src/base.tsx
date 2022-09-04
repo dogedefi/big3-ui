@@ -19,16 +19,16 @@ export const Big3Page = styled.main<Big3Props<HTMLBaseElement>>`
   ${props => baseCss(props)};
 `
 
-export const Big3Paragraph = styled.p.attrs({ whiteSpace: 'pre-wrap' })<Big3Props<HTMLParagraphElement>>`
+export const Big3Paragraph = styled.p<Big3Props<HTMLParagraphElement>>`
   display: -webkit-box;
-  -webkit-line-clamp: ${props => `${props.rows ?? 4}`}; /* number of lines to show */
-  line-clamp: ${props => `${props.rows ?? 4}`};
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  word-break: ${props => settleCss(props.wordBreak, 'break-word')};
-  white-space: ${props => settleCss(props.whiteSpace, 'pre-wrap')};
+  word-break: break-word;
+  white-space: nowrap;
   ${props => textCss(props)};
+  -webkit-line-clamp: ${props => `${props.rows ?? 4}`}; /* number of lines to show */
+  line-clamp: ${props => `${props.rows ?? 4}`};
 `
 
 export const Big3Text = styled.span<Big3Props<HTMLSpanElement>>`
@@ -36,8 +36,8 @@ export const Big3Text = styled.span<Big3Props<HTMLSpanElement>>`
   flex-shrink: 0;
   overflow: hidden;
   text-overflow: ellipsis;
-  word-break: ${props => settleCss(props.wordBreak, 'keep-all')};
-  white-space: ${props => settleCss(props.whiteSpace, 'nowrap')};
+  word-break: break-word;
+  white-space: nowrap;
   ${props => textCss(props)}
 `
 
