@@ -25,7 +25,7 @@ export const Big3Paragraph = styled.p<Big3Props<HTMLParagraphElement>>`
   overflow: hidden;
   text-overflow: ellipsis;
   word-break: break-word;
-  white-space: nowrap;
+  white-space: pre-wrap;
   ${props => textCss(props)};
   -webkit-line-clamp: ${props => `${props.rows ?? 4}`}; /* number of lines to show */
   line-clamp: ${props => `${props.rows ?? 4}`};
