@@ -1,5 +1,5 @@
 import { Big3Props, FlexCss, Heading } from './interface'
-import styled, { css } from 'wired-styled-px2vw'
+import styled from 'wired-styled-px2vw'
 import { baseCss, textCss, flexCss, settleCss } from '.'
 import { createElement, FC } from 'react'
 
@@ -60,7 +60,7 @@ export const Big3Link = styled.a<Big3Props<HTMLAnchorElement> & FlexCss>`
   &.active,
   &:hover {
     -webkit-text-stroke-width: ${props => settleCss(props.strokeWidth, 0.666666)};
-    color: ${props => settleCss(props.color, 'black')};
+    color: ${props => settleCss(props.color, 'var(--primary-color)')};
   }
 `
 
@@ -74,24 +74,14 @@ export const Big3ListItem = styled.li<Big3Props<HTMLLIElement> & FlexCss>`
   ${props => flexCss(props)};
 `
 
-export const Big3Nav = styled.nav<Big3Props<HTMLBaseElement> & FlexCss & { activeColor: string }>`
+export const Big3Nav = styled.nav<Big3Props<HTMLBaseElement> & FlexCss>`
   ${props => flexCss(props)}
-  ${props =>
-    props.activeColor &&
-    css`
-      > a.active {
-        color: ${props.activeColor};
-      }
-    `};
 `
 
 export const Big3NavLink = styled(Big3Link)`
-  transition: all 0.2s;
-
-  &.active,
-  &:hover {
-    -webkit-text-stroke-width: ${props => settleCss(props.strokeWidth, 0.666666)};
-    color: ${props => settleCss(props.color, 'black')};
+  transition: color 0.2s;
+  * {
+    transition: color 0.2s;
   }
 `
 
