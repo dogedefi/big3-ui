@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { chainLocalKey } from './config'
 import { chains } from './config/chains'
 import { Chain as DataType, ChainConfig } from './config/types'
-import { setupNetwork, checkIfMatch, getProvider } from './utils/network'
+import { checkIfMatch, getProvider } from './utils/network'
 import { ethers } from 'ethers'
 import sample from 'lodash.sample'
 
@@ -24,12 +24,21 @@ export const initChainModel = () => {
     let chainConfig = localStorage.getItem(chainLocalKey)
 
     if (!chainConfig) {
-      checkIfMatch({ name: defaultChain.chainName, config: defaultChain }).then((res) => setMatched(res))
+      checkIfMatch({ name: defaultChain.chainName, config: defaultChain }).then(res => setMatched(res))
     } else if (/^{(.*)}$/.test(chainConfig)) {
       const cachedChain = JSON.parse(chainConfig)
       setChain(cachedChain)
-      checkIfMatch(cachedChain).then((res) => setMatched(res))
-      setupNetwork(cachedChain)
+      ;(async () => {
+        const isGoodChain = await checkIfMatch(cachedChain)
+        setMatched(isGoodChain)
+
+        // if it's not a specified chain network, you need to reset the cache
+        if (!isGoodChain) {
+          localStorage.clear()
+          location.reload()
+        }
+      })()
+      // setupNetwork(cachedChain)
     } else {
       localStorage.clear()
       location.reload()
@@ -76,14 +85,14 @@ export const initChainModel = () => {
     accountsChanged,
     allNotConnected, // no account is connected
     accountDisconnected, // deactive account
-    accountConnected, // active account
+    accountConnected // active account
   }
 }
 
 export const SimpleProviderFactory = {
   create(rpcUrl: string | string[]) {
     return new ethers.providers.JsonRpcProvider(sample(rpcUrl))
-  },
+  }
 }
 
 // export
