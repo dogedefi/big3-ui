@@ -44,7 +44,7 @@ const useAuth = () => {
             }
           }
         })
-        window.localStorage.setItem(connectorLocalStorageKey, connectorId)
+        localStorage.setItem(connectorLocalStorageKey, connectorId)
       } else {
         alert('Unable to find connector')
       }
