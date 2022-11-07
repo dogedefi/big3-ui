@@ -1,9 +1,7 @@
 // Set of helper functions to facilitate wallet setup
 
 import { Chain, ConnectorNames } from "../config/types";
-import { connectorLocalStorageKey } from "../config";
-
-export const chainLocalKey = "chain";
+import { chainLocalKey, connectorLocalStorageKey } from "../config";
 
 enum OverrideProviderMap {
   METAMASK = 'MetaMask',

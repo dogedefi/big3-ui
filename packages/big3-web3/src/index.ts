@@ -96,10 +96,7 @@ export const SimpleProviderFactory = {
 }
 
 // export
-export { Config, Chain } from './config/types'
 export { default as connectors } from './config/wallet'
-export { chains } from './config/chains'
-export * from './config'
 
 export { default as useAuth } from './useAuth'
 export { default as useWallet } from './useWallet'
@@ -107,7 +104,9 @@ export { default as useChain } from './useChain'
 export { default as useEagerConnect } from './useEagerConnect'
 export { default as useWeb3Provider } from './useWeb3Provider'
 
-export { getLibrary, ConnectorNames, connectorsByName } from './utils/web3'
-export { setupNetwork } from './utils/network'
-
+export * from './utils/web3'
+export * from './utils/network'
 export * from '@web3-react/core'
+export * from './config'
+export * from './config/chains'
+export * from './config/types'
