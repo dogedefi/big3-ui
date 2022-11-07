@@ -21,15 +21,11 @@ export const initChainModel = () => {
 
   // initial chain config
   useEffect(() => {
-    let chainNetwork = localStorage.getItem(chainLocalKey)
-
-    if (!chainNetwork) {
-      checkIfMatch({ name: defaultChain.chainName, config: defaultChain }).then(res => setMatched(res))
-    } else if (/^{(.*)}$/.test(chainNetwork)) {
-      const cachedChain = JSON.parse(chainNetwork)
-      setChain(cachedChain)
+    try {
+      const network = JSON.parse(localStorage.getItem(chainLocalKey) || '')
+      setChain(network)
       ;(async () => {
-        const isGoodChain = await checkIfMatch(cachedChain)
+        const isGoodChain = await checkIfMatch(network)
         setMatched(isGoodChain)
 
         // if it's not a specified chain network, you need to reset the cache
@@ -38,10 +34,9 @@ export const initChainModel = () => {
           location.reload()
         }
       })()
-      // setupNetwork(cachedChain)
-    } else {
-      localStorage.clear()
-      location.reload()
+    } catch (error) {
+      console.error('failed to initilize the web3 enviroment.', error?.toString())
+      checkIfMatch({ name: defaultChain.chainName, config: defaultChain }).then(res => setMatched(res))
     }
   }, [])
 
