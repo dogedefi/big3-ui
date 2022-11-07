@@ -12,16 +12,16 @@ export interface Config {
 
 export interface Chain {
   name: string;
-  config: ChainConfig;
+  config: ChainNetwork;
 }
 
-export interface ChainModel {
+export interface ChainHookOptions {
   chain: Chain;
   setChain: (chain: Chain) => void;
   matched: boolean;
 }
 
-export interface ChainConfig {
+export interface ChainNetwork {
   chainId: string;
   chainName: string;
   nativeCurrency: {

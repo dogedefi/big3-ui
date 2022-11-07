@@ -1,4 +1,4 @@
-import { ChainConfig } from './types'
+import { ChainNetwork } from './types'
 
 export const defaultChains = {
   BSC: {
@@ -46,4 +46,4 @@ export const chains = process.env.CHAIN_ENV
   : window.chains || defaultChains
 console.log('chains config:', chains)
 
-export const chainIds = (Object.values(chains) as ChainConfig[]).map((chain) => parseInt(chain?.chainId))
+export const chainIds = (Object.values(chains) as ChainNetwork[]).map((chain) => parseInt(chain?.chainId))

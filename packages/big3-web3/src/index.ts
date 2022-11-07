@@ -2,12 +2,12 @@
 import { useEffect, useState } from 'react'
 import { chainLocalKey } from './config'
 import { chains } from './config/chains'
-import { Chain as DataType, ChainConfig } from './config/types'
+import { Chain, ChainNetwork } from './config/types'
 import { checkIfMatch, getProvider } from './utils/network'
 import { ethers } from 'ethers'
 import sample from 'lodash.sample'
 
-const defaultChain = Object.values(chains)[0] as ChainConfig
+const defaultChain = Object.values(chains)[0] as ChainNetwork
 
 export const initChainModel = () => {
   const [matched, setMatched] = useState(false)
@@ -17,16 +17,16 @@ export const initChainModel = () => {
   const [allNotConnected, setAllNotConnected] = useState(false)
   const [accountDisconnected, setAccountDisconnected] = useState(false)
   const [accountConnected, setAccountConnected] = useState(false)
-  const [chain, setChain] = useState<DataType>({ name: defaultChain.chainName, config: defaultChain })
+  const [chain, setChain] = useState<Chain>({ name: defaultChain.chainName, config: defaultChain })
 
   // initial chain config
   useEffect(() => {
-    let chainConfig = localStorage.getItem(chainLocalKey)
+    let chainNetwork = localStorage.getItem(chainLocalKey)
 
-    if (!chainConfig) {
+    if (!chainNetwork) {
       checkIfMatch({ name: defaultChain.chainName, config: defaultChain }).then(res => setMatched(res))
-    } else if (/^{(.*)}$/.test(chainConfig)) {
-      const cachedChain = JSON.parse(chainConfig)
+    } else if (/^{(.*)}$/.test(chainNetwork)) {
+      const cachedChain = JSON.parse(chainNetwork)
       setChain(cachedChain)
       ;(async () => {
         const isGoodChain = await checkIfMatch(cachedChain)
