@@ -58,7 +58,6 @@ const useAuth = () => {
       connectorsByName[ConnectorNames.WalletConnect].close()
       connectorsByName[ConnectorNames.WalletConnect].walletConnectProvider = undefined
     }
-    window.location.reload()
   }, [deactivate])
 
   return { login, logout, error }

@@ -6,8 +6,10 @@ import { Chain, ChainNetwork } from './config/types'
 import { checkIfMatch, getProvider } from './utils/network'
 import { ethers } from 'ethers'
 import sample from 'lodash.sample'
+import useForceUpdate from './hook/useForceUpdate'
 
-const defaultChain = Object.values(chains)[0] as ChainNetwork
+const chainNetwork = Object.values(chains)[0] as ChainNetwork
+const defaultChain = { name: chainNetwork.chainName, config: chainNetwork }
 
 export const initChainModel = () => {
   const [matched, setMatched] = useState(false)
@@ -17,28 +19,41 @@ export const initChainModel = () => {
   const [allNotConnected, setAllNotConnected] = useState(false)
   const [accountDisconnected, setAccountDisconnected] = useState(false)
   const [accountConnected, setAccountConnected] = useState(false)
-  const [chain, setChain] = useState<Chain>({ name: defaultChain.chainName, config: defaultChain })
+  const [chain, setChain] = useState<Chain>(defaultChain)
+  const { forceUpdate, trigger } = useForceUpdate()
+
+  // reset
+  useEffect(() => {
+    setMatched(false)
+    setAccounts([])
+    setChainChanged(false)
+    setAccountsChanged(false)
+    setAllNotConnected(false)
+    setAccountDisconnected(false)
+    setAccountConnected(false)
+    setChain(defaultChain)
+  }, [trigger])
 
   // initial chain config
   useEffect(() => {
     try {
-      const network = JSON.parse(localStorage.getItem(chainLocalKey) || '')
-      setChain(network)
+      const chain = JSON.parse(localStorage.getItem(chainLocalKey) || '')
+      setChain(chain)
       ;(async () => {
-        const isGoodChain = await checkIfMatch(network)
+        const isGoodChain = await checkIfMatch(chain)
         setMatched(isGoodChain)
 
         // if it's not a specified chain network, you need to reset the cache
         if (!isGoodChain) {
           localStorage.clear()
-          location.reload()
+          forceUpdate()
         }
       })()
     } catch (error) {
       console.error('failed to initilize the web3 enviroment.', error?.toString())
-      checkIfMatch({ name: defaultChain.chainName, config: defaultChain }).then(res => setMatched(res))
+      checkIfMatch(defaultChain).then(res => setMatched(res))
     }
-  }, [])
+  }, [trigger])
 
   useEffect(() => {
     ;(async () => {
@@ -48,7 +63,7 @@ export const initChainModel = () => {
         setAccounts(accounts)
       }
     })()
-  }, [])
+  }, [trigger])
 
   useEffect(() => {
     const provider: any = getProvider()
@@ -66,10 +81,12 @@ export const initChainModel = () => {
     }
 
     return () => {
-      provider.removeListener('chainChanged', handleChainChanged)
-      provider.removeListener('accountsChanged', handleAccountsChanged)
+      if (provider) {
+        provider.removeListener('chainChanged', handleChainChanged)
+        provider.removeListener('accountsChanged', handleAccountsChanged)
+      }
     }
-  }, [accounts])
+  }, [trigger, accounts])
 
   return {
     chain,
@@ -80,7 +97,9 @@ export const initChainModel = () => {
     accountsChanged,
     allNotConnected, // no account is connected
     accountDisconnected, // deactive account
-    accountConnected // active account
+    accountConnected, // active account
+    refresh: forceUpdate,
+    refreshKey: trigger
   }
 }
 
