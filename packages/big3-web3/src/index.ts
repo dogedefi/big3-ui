@@ -9,7 +9,7 @@ import sample from 'lodash.sample'
 import useForceUpdate from './hook/useForceUpdate'
 
 const chainNetwork = Object.values(chains)[0] as ChainNetwork
-const defaultChain = { name: chainNetwork.chainName, config: chainNetwork }
+export const defaultChain = { name: chainNetwork.chainName, config: chainNetwork }
 
 export const initChainModel = () => {
   const [matched, setMatched] = useState(false)
@@ -40,17 +40,19 @@ export const initChainModel = () => {
       const chain = JSON.parse(localStorage.getItem(chainLocalKey) || '')
       setChain(chain)
       ;(async () => {
-        const isGoodChain = await checkIfMatch(chain)
-        setMatched(isGoodChain)
+        const isRightChain = await checkIfMatch(chain)
 
         // if it's not a specified chain network, you need to reset the cache
-        if (!isGoodChain) {
-          localStorage.clear()
+        if (!isRightChain) {
+          localStorage.removeItem(chainLocalKey)
           forceUpdate()
         }
+
+        setMatched(isRightChain)
       })()
     } catch (error) {
       console.error('failed to initilize the web3 enviroment.', error?.toString())
+      localStorage.setItem(chainLocalKey, JSON.stringify(defaultChain))
       checkIfMatch(defaultChain).then(res => setMatched(res))
     }
   }, [trigger])
@@ -93,6 +95,7 @@ export const initChainModel = () => {
     accounts,
     setChain,
     matched,
+    setMatched,
     chainChanged,
     accountsChanged,
     allNotConnected, // no account is connected

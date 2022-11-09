@@ -16,9 +16,10 @@ export interface Chain {
 }
 
 export interface ChainHookOptions {
-  chain: Chain;
-  setChain: (chain: Chain) => void;
-  matched: boolean;
+  chain: Chain
+  setChain: Function
+  setMatched: Function
+  matched: boolean
 }
 
 export interface ChainNetwork {

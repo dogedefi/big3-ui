@@ -1,17 +1,16 @@
-import { ChainScope } from "config";
-import { Chain, ChainNetwork, ChainHookOptions } from "config/types";
-import { useCallback } from "react";
-import { chains, setupNetwork } from ".";
+import { Chain, ChainHookOptions } from 'config/types'
+import { useCallback } from 'react'
+import { setupNetwork } from '.'
 
-const useChain = ({ setChain }: ChainHookOptions) => {
-  const switchChain = useCallback(async (key: ChainScope) => {
-    const config: Chain = { name: key, config: chains[key] as ChainNetwork };
+const useChain = ({ setChain, setMatched }: ChainHookOptions) => {
+  const switchChain = useCallback(async (config: Chain) => {
     if (await setupNetwork(config)) {
-      setChain(config);
+      setChain(config)
+      setMatched(true)
     }
-  }, []);
+  }, [])
 
-  return { switchChain };
-};
+  return { switchChain }
+}
 
-export default useChain;
+export default useChain
