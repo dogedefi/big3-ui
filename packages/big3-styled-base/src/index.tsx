@@ -22,7 +22,7 @@ export const baseCss = (style: CSSProperties) => css`
   color: inherit;
   ${Object.keys(style).reduce((accumulator, key) => {
     if (
-      /visibility|letterSpacing|grid|word|white|whiteSpace|box|border|justify|align|scroll|display|width|height|margin|padding|font|text|color|cursor|flex|background|transform|top|bottom|right|left|position|overflow|transition|opacity|animation|zindex/i.test(
+      /webkit|outline|visibility|letterSpacing|grid|word|white|whiteSpace|box|border|justify|align|scroll|display|width|height|margin|padding|font|text|color|cursor|flex|background|transform|top|bottom|right|left|position|overflow|transition|opacity|animation|zindex/i.test(
         key
       )
     ) {
@@ -34,6 +34,9 @@ export const baseCss = (style: CSSProperties) => css`
       // you can break the line, add indent for it if you need
       if (/weight|opacity|z-index|flex/i.test(cssKey)) {
         return `${accumulator}${cssKey}:${cssValue};`
+      }
+      if (/webkit/i.test(cssKey)) {
+        return `${accumulator}-${cssKey}:${cssValue};`
       }
       if (/^[\d\.-]+$/.test(cssValue)) {
         return `${accumulator}${cssKey}:${cssValue}px;`
