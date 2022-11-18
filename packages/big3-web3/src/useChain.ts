@@ -7,7 +7,9 @@ const useChain = ({ setChain, setMatched }: ChainHookOptions) => {
     if (await setupNetwork(config)) {
       setChain(config)
       setMatched(true)
+      return true
     }
+    return false
   }, [])
 
   return { switchChain }
