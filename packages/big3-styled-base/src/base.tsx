@@ -20,7 +20,7 @@ export const Big3Page = styled.main<Big3Props<HTMLBaseElement>>`
 `
 
 export const Big3Paragraph = styled.p<Big3Props<HTMLParagraphElement>>`
-  display: -webkit-box;
+  display: -webkit-inline-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
