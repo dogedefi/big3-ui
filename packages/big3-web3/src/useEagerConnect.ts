@@ -35,7 +35,7 @@ const useEagerConnect = (connectEagerly = true) => {
 
       login(connectorId)
     }
-  }, [login])
+  }, [login, connectEagerly])
 
   return { error }
 }
