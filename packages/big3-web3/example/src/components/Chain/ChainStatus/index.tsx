@@ -3,7 +3,7 @@ import './mobile.less';
 
 import { useModel } from 'umi';
 import { Select } from 'antd';
-import { chains, useChain } from 'web3-connector';
+import { chains, useChain } from 'big3-web3';
 
 const { Option } = Select;
 

@@ -4,7 +4,7 @@ import './mobile.less';
 import { Button, Modal } from 'antd';
 import ImgExplore from '@/assets/images/icon-explore.svg';
 import { useWeb3React } from '@web3-react/core';
-import { useWallet } from 'web3-connector';
+import { useWallet } from 'big3-web3';
 import { useModel } from 'umi';
 import { CopyOutlined } from '@ant-design/icons';
 
@@ -90,7 +90,7 @@ const WalletModal = (props: IWalletModalProps) => {
         <section className="logout">
           {connectors.map((walletConfig) => {
             // WalletCard
-            const { title, icon: WalletIcon } = walletConfig;
+            const { title } = walletConfig;
 
             return (
               <Button
@@ -101,7 +101,7 @@ const WalletModal = (props: IWalletModalProps) => {
                 }}
                 id={`wallet-connect-${title.toLocaleLowerCase()}`}
               >
-                <WalletIcon />
+                {title}
               </Button>
             );
           })}
