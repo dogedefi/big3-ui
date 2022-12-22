@@ -3,15 +3,19 @@ import { CSSProperties } from 'react'
 import kebabCase from 'lodash.kebabcase'
 import { FlexCss } from './interface'
 
-export const settleCss = (source: any, _default?: any) => {
-  _default = typeof _default === 'number' ? `${_default}px` : _default
-  if (typeof source === 'number') {
-    return source ? `${source}px` : _default
+const a = document.createElement('a')
+const img = document.createElement('img')
+const p = document.createElement('p')
+const allAttrKeys = Object.keys(Object.assign({}, a.style, img.style, p.style))
+
+export const settleCss = (cssValue: any, _default?: any) => {
+  if (!cssValue) {
+    return _default
   }
-  if (typeof source === 'string') {
-    return source ?? _default
+  if (/^[\d\.-]+$/.test(cssValue)) {
+    return `${cssValue}px;`
   }
-  return source ?? _default
+  return cssValue
 }
 
 export const baseCss = (style: CSSProperties) => css`
@@ -21,11 +25,7 @@ export const baseCss = (style: CSSProperties) => css`
   font-weight: inherit;
   color: inherit;
   ${Object.keys(style).reduce((accumulator, key) => {
-    if (
-      /webkit|outline|visibility|letterSpacing|grid|word|white|whiteSpace|box|border|justify|align|scroll|display|width|height|margin|padding|font|text|color|cursor|flex|background|transform|top|bottom|right|left|position|overflow|transition|opacity|animation|zindex/i.test(
-        key
-      )
-    ) {
+    if (allAttrKeys.includes(key)) {
       // transform the key from camelCase to kebab-case
       const cssKey = kebabCase(key)
       // remove ' in value
