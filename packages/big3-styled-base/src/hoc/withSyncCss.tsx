@@ -1,25 +1,31 @@
-import React, { FC, useEffect, useState } from 'react'
-import styled, { CSSProperties } from 'wired-styled-px2vw'
+import React, { useState, FC, useEffect } from 'react'
+import { CSSProperties } from 'wired-styled-px2vw'
 
-type DOMRectKey = 'height' | 'width' | 'x' | 'y'
+interface BaseProps {}
 
-const withSyncCss = <T extends unknown>(Component: T, selector: string, cssKeys: DOMRectKey[]) => {
-  const WrapperComponent = styled(Component as any)``
-  const EnhancedComponent: FC<T> = (props: any) => {
+export default function withSyncCss<T extends BaseProps>(
+  WrappedComponent: React.FC<T>,
+  element: HTMLElement,
+  cssKeys: (keyof DOMRect | any)[]
+) {
+  // Try to create a nice displayName for React Dev Tools.
+  const displayName = WrappedComponent.displayName || WrappedComponent.name || 'Component'
+
+  // Creating the inner component. The calculated Props type here is the where the magic happens.
+  const ComponentWithTheme: FC<Omit<T, keyof BaseProps>> = props => {
+    // Fetch the props you want to inject. This could be done with context instead.
+
+    // extend...
     const [css, setCss] = useState<CSSProperties>()
 
     useEffect(() => {
-      const target = document.querySelector(selector)
-      if (target) {
+      if (element) {
         const resizeObserver = new ResizeObserver(entries => {
-          const rectProps = entries[0].target.getClientRects()[0]
-          const { highestWeightProps } = props
+          const rectProps: DOMRect = entries[0].target.getClientRects()[0]
           if (rectProps) {
             setCss(
               cssKeys.reduce((css, key) => {
-                if (!highestWeightProps?.includes(key)) {
-                  css[key] = rectProps[key]
-                }
+                css[key] = rectProps[key as keyof DOMRect]
                 return css
               }, {} as DOMRect)
             )
@@ -27,14 +33,15 @@ const withSyncCss = <T extends unknown>(Component: T, selector: string, cssKeys:
         })
 
         // start observing a DOM node
-        resizeObserver.observe(target)
+        resizeObserver.observe(element)
       }
-    }, [selector])
+    }, [element])
 
-    return <WrapperComponent {...(props as any)} style={css} />
+    // props comes afterwards so the can override the default ones.
+    return <WrappedComponent {...(props as T)} style={css} />
   }
 
-  return EnhancedComponent
-}
+  ComponentWithTheme.displayName = `withSyncCss(${displayName})`
 
-export default withSyncCss
+  return ComponentWithTheme
+}
