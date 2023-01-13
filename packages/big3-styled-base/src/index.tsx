@@ -2,11 +2,7 @@ import { css } from 'wired-styled-px2vw'
 import { CSSProperties } from 'react'
 import kebabCase from 'lodash.kebabcase'
 import { FlexCss } from './interface'
-
-const a = document.createElement('a')
-const img = document.createElement('img')
-const p = document.createElement('p')
-const allAttrKeys = Object.keys(Object.assign({}, a.style, img.style, p.style))
+import cssKeys from './cssKeys'
 
 export const settleCss = (cssValue: any, _default?: any) => {
   if (!cssValue) {
@@ -25,7 +21,7 @@ export const baseCss = (style: CSSProperties) => css`
   font-weight: inherit;
   color: inherit;
   ${Object.keys(style).reduce((accumulator, key) => {
-    if (allAttrKeys.includes(key)) {
+    if (cssKeys.includes(key)) {
       // transform the key from camelCase to kebab-case
       const cssKey = kebabCase(key)
       // remove ' in value
