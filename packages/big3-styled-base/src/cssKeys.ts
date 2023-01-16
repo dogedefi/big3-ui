@@ -361,7 +361,6 @@ export default [
   'sizeAdjust',
   'speak',
   'speakAs',
-  'src',
   'stopColor',
   'stopOpacity',
   'stroke',
