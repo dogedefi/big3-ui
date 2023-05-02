@@ -1,4 +1,4 @@
-import { css } from 'wired-styled-px2vw'
+import { css } from 'big3-styled'
 import { CSSProperties } from 'react'
 import kebabCase from 'lodash.kebabcase'
 import { FlexCss } from './interface'

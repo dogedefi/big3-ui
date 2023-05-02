@@ -1,6 +1,6 @@
 {
   "name": "big3-styled-base",
-  "version": "1.3.32",
+  "version": "1.4.0",
   "main": "dist/index.js",
   "module": "dist/big3-styled-base.esm.js",
   "typings": "dist/index.d.ts",
@@ -30,7 +30,7 @@
   },
   "peerDependencies": {
     "react": ">=17.x",
-    "wired-styled-px2vw": ">=1.x"
+    "big3-styled": ">=1.x"
   },
   "devDependencies": {
     "@types/jest": "^24.0.21",
@@ -41,6 +41,6 @@
     "react": ">=16.8",
     "react-dom": ">=16.8",
     "tsdx": "^0.11.0",
-    "wired-styled-px2vw": "^2.3.2"
+    "big3-styled": ">=1.x"
   }
 }

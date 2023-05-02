@@ -1,6 +1,6 @@
 import throttle from 'lodash.throttle'
 import React, { useEffect, useState, FC, useRef } from 'react'
-import styled, { css } from 'wired-styled-px2vw'
+import styled, { css } from 'big3-styled'
 import { Big3Props } from './interface'
 
 const watchIntersectionRatio = (selector: string, callback: Function, intersectionRatio: number | number[]) => {

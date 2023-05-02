@@ -1,5 +1,5 @@
 import React, { useState, FC, useEffect } from 'react'
-import { CSSProperties } from 'wired-styled-px2vw'
+import { CSSProperties } from 'big3-styled'
 
 interface BaseProps {}
 

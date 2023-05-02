@@ -1,5 +1,5 @@
 import { Big3Props, FlexCss, Heading } from './interface'
-import styled from 'wired-styled-px2vw'
+import styled from 'big3-styled'
 import { baseCss, textCss, flexCss, settleCss } from '.'
 import { createElement, FC } from 'react'
 

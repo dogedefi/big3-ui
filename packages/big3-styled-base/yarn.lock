@@ -6486,9 +6486,9 @@ which@^2.0.1:
   dependencies:
     isexe "^2.0.0"
 
-wired-styled-px2vw@^2.3.2:
+big3-styled@^2.3.2:
   version "2.3.2"
-  resolved "https://registry.npmjs.org/wired-styled-px2vw/-/wired-styled-px2vw-2.3.2.tgz#654b6ecd93bf4980bcb8c44c403819c600341be2"
+  resolved "https://registry.npmjs.org/big3-styled/-/big3-styled-2.3.2.tgz#654b6ecd93bf4980bcb8c44c403819c600341be2"
   integrity sha512-+s6vepe0rjwQ7BloVab3e4uiFRLTrrxkYFjLY1SAcnvnsU0sfZg+WTlt3LLVWkfr10UmJfnWIRUgWxbPYsEmMQ==
   dependencies:
     "@types/styled-components" "^5.1.1"
