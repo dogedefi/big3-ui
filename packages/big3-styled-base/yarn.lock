@@ -1966,6 +1966,14 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
+big3-styled@>=1.x:
+  version "1.0.2"
+  resolved "https://registry.npmmirror.com/big3-styled/-/big3-styled-1.0.2.tgz#932bbeafce5e5295401a619f8ce9faaa9c464f97"
+  integrity sha512-rgyUZRISFsOvoK4HDEhITABORLL/GQp5tzh/1aYpvuS6CBVDJeJtoM9WoCnZ7bcZtFQ0z2LXlmXXoe0drAYIYw==
+  dependencies:
+    "@types/styled-components" "^5.1.1"
+    styled-components "^5.1.1"
+
 bindings@^1.5.0:
   version "1.5.0"
   resolved "https://registry.npmmirror.com/bindings/-/bindings-1.5.0.tgz#10353c9e945334bc0511a6d90b38fbc7c9c504df"
@@ -6485,14 +6493,6 @@ which@^2.0.1:
   integrity sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==
   dependencies:
     isexe "^2.0.0"
-
-big3-styled@^2.3.2:
-  version "2.3.2"
-  resolved "https://registry.npmjs.org/big3-styled/-/big3-styled-2.3.2.tgz#654b6ecd93bf4980bcb8c44c403819c600341be2"
-  integrity sha512-+s6vepe0rjwQ7BloVab3e4uiFRLTrrxkYFjLY1SAcnvnsU0sfZg+WTlt3LLVWkfr10UmJfnWIRUgWxbPYsEmMQ==
-  dependencies:
-    "@types/styled-components" "^5.1.1"
-    styled-components "^5.1.1"
 
 word-wrap@~1.2.3:
   version "1.2.3"
