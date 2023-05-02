@@ -24,13 +24,14 @@
   },
   "license": "GPL-3.0-or-later",
   "dependencies": {
+    "big3-styled-base": "^1.4.2",
     "lodash.kebabcase": "^4.1.1",
     "lodash.throttle": "^4.1.1",
     "tiny-invariant": "^1.0.6"
   },
   "peerDependencies": {
-    "react": ">=17.x",
-    "big3-styled": ">=1.x"
+    "big3-styled": ">=1.x",
+    "react": ">=17.x"
   },
   "devDependencies": {
     "@types/jest": "^24.0.21",
@@ -38,9 +39,9 @@
     "@types/lodash.throttle": "^4.1.7",
     "@types/react": "^16.9.11",
     "@types/react-dom": "^16.9.4",
+    "big3-styled": ">=1.x",
     "react": ">=16.8",
     "react-dom": ">=16.8",
-    "tsdx": "^0.11.0",
-    "big3-styled": ">=1.x"
+    "tsdx": "^0.11.0"
   }
 }

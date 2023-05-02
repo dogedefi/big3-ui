@@ -1966,6 +1966,15 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
+big3-styled-base@^1.4.2:
+  version "1.4.2"
+  resolved "https://registry.npmjs.org/big3-styled-base/-/big3-styled-base-1.4.2.tgz#8a79f5ae088cf8619c1d8ef143365007b08cb7ef"
+  integrity sha512-/QpTUcJZ6EAwsXmx59FfbUJCVJIIMWskn2duZI8hXeugA/qJSXa9KyTjuWQgrahDfGvTXlmqh0scUsA6R/vu5g==
+  dependencies:
+    lodash.kebabcase "^4.1.1"
+    lodash.throttle "^4.1.1"
+    tiny-invariant "^1.0.6"
+
 big3-styled@>=1.x:
   version "1.0.2"
   resolved "https://registry.npmmirror.com/big3-styled/-/big3-styled-1.0.2.tgz#932bbeafce5e5295401a619f8ce9faaa9c464f97"
