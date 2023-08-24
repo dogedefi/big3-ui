@@ -6,33 +6,27 @@ import { Chain, ChainNetwork } from './config/types'
 import { checkIfMatch, getProvider } from './utils/network'
 import { ethers } from 'ethers'
 import sample from 'lodash.sample'
-import useForceUpdate from './hook/useForceUpdate'
 
 const chainNetwork = Object.values(chains)[0] as ChainNetwork
 export const defaultChain = { name: chainNetwork.chainName, config: chainNetwork }
 
+const CACHE_WEB3_IS_SUPPORTED_CHAIN = 'WEB3_IS_SUPPORTED_CHAIN'
+const CACHE_WEB3_CURRENT_WALLET = 'WEB3_CURRENT_WALLET'
+
 export const initChainModel = () => {
-  const [matched, setMatched] = useState(false)
+  const [matched, setMatched] = useState(Boolean(localStorage.getItem(CACHE_WEB3_IS_SUPPORTED_CHAIN) ?? 'false'))
   const [accounts, setAccounts] = useState<string[]>([])
-  const [chainChanged, setChainChanged] = useState(false)
-  const [accountsChanged, setAccountsChanged] = useState(false)
+  const [switchingChain, setSwitchingChain] = useState(false)
+  const [switchingAccount, setSwitchingAccount] = useState(false)
   const [allNotConnected, setAllNotConnected] = useState(false)
   const [accountDisconnected, setAccountDisconnected] = useState(false)
   const [accountConnected, setAccountConnected] = useState(false)
   const [chain, setChain] = useState<Chain>(defaultChain)
-  const { forceUpdate, trigger } = useForceUpdate()
 
-  // reset
+  // Update cache from local storage
   useEffect(() => {
-    setMatched(false)
-    setAccounts([])
-    setChainChanged(false)
-    setAccountsChanged(false)
-    setAllNotConnected(false)
-    setAccountDisconnected(false)
-    setAccountConnected(false)
-    setChain(defaultChain)
-  }, [trigger])
+    localStorage.setItem(CACHE_WEB3_IS_SUPPORTED_CHAIN, String(matched))
+  }, [matched])
 
   // initial chain config
   useEffect(() => {
@@ -45,17 +39,19 @@ export const initChainModel = () => {
         // if it's not a specified chain network, you need to reset the cache
         if (!isRightChain) {
           localStorage.removeItem(chainLocalKey)
-          forceUpdate()
         }
 
         setMatched(isRightChain)
+        setSwitchingChain(false)
       })()
     } catch (error) {
       console.error('failed to initilize the web3 enviroment.', error?.toString())
       localStorage.setItem(chainLocalKey, JSON.stringify(defaultChain))
-      checkIfMatch(defaultChain).then(res => setMatched(res))
+      checkIfMatch(defaultChain)
+        .then(res => setMatched(res))
+        .finally(() => setSwitchingChain(false))
     }
-  }, [trigger])
+  }, [switchingChain])
 
   useEffect(() => {
     ;(async () => {
@@ -63,18 +59,20 @@ export const initChainModel = () => {
       if (provider) {
         const accounts = await provider.request({ method: 'eth_accounts' })
         setAccounts(accounts)
+        setSwitchingAccount(false)
       }
     })()
-  }, [trigger])
+  }, [switchingChain, switchingAccount])
 
   useEffect(() => {
     const provider: any = getProvider()
-    const handleChainChanged = () => setChainChanged(true)
+    const handleChainChanged = () => setSwitchingChain(true)
     const handleAccountsChanged = (_accounts: string[]) => {
       setAllNotConnected(_accounts.length === 0)
       setAccountDisconnected(_accounts.length < accounts.length)
       setAccountConnected(_accounts.length > accounts.length)
-      setAccountsChanged(true)
+      setSwitchingAccount(true)
+      localStorage.setItem(CACHE_WEB3_CURRENT_WALLET, (window.ethereum as any)?.selectedAddress)
     }
 
     if (provider) {
@@ -88,7 +86,7 @@ export const initChainModel = () => {
         provider.removeListener('accountsChanged', handleAccountsChanged)
       }
     }
-  }, [trigger, accounts])
+  }, [matched]) // update provider
 
   return {
     chain,
@@ -96,13 +94,11 @@ export const initChainModel = () => {
     setChain,
     matched,
     setMatched,
-    chainChanged,
-    accountsChanged,
+    switchingChain,
+    switchingAccount,
     allNotConnected, // no account is connected
     accountDisconnected, // deactive account
-    accountConnected, // active account
-    refresh: forceUpdate,
-    refreshKey: trigger
+    accountConnected // active account
   }
 }
 
